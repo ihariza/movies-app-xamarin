@@ -70,6 +70,33 @@ namespace MoviesApp {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Seguramente sea cosa nuestra, pero por si acaso revisa tu conexión. ¡Gracias!.
+        /// </summary>
+        internal static string CommonErrorSubtitle {
+            get {
+                return ResourceManager.GetString("CommonErrorSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¡Ups!.
+        /// </summary>
+        internal static string CommonErrorTitle {
+            get {
+                return ResourceManager.GetString("CommonErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reintentar.
+        /// </summary>
+        internal static string CommonRetry {
+            get {
+                return ResourceManager.GetString("CommonRetry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sin descripción.
         /// </summary>
         internal static string MoviesNoOverview {

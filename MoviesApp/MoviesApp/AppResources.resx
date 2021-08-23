@@ -120,6 +120,15 @@
   <data name="AppName" xml:space="preserve">
     <value>MoviesApp</value>
   </data>
+  <data name="CommonErrorSubtitle" xml:space="preserve">
+    <value>Seguramente sea cosa nuestra, pero por si acaso revisa tu conexión. ¡Gracias!</value>
+  </data>
+  <data name="CommonErrorTitle" xml:space="preserve">
+    <value>¡Ups!</value>
+  </data>
+  <data name="CommonRetry" xml:space="preserve">
+    <value>Reintentar</value>
+  </data>
   <data name="MoviesNoOverview" xml:space="preserve">
     <value>Sin descripción</value>
   </data>

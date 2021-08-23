@@ -10,6 +10,7 @@ namespace MoviesApp
 
         public static NavigationService NavigationService { get; } = new NavigationService();
         public static MovieDataService MovieDataService { get; } = new MovieDataService();
+        public static DialogService DialogService { get; } = new DialogService();
         public App()
         {
             InitializeComponent();

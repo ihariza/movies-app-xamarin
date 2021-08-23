@@ -1,5 +1,6 @@
 ﻿using MoviesApp.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,14 +15,23 @@ namespace MoviesApp.Services
 
         private readonly HttpClient httpClient = new HttpClient();
 
-        public async Task<List<Movie>> GetMovies(int pageIndex)
+        public async Task<DataWrapper<List<Movie>>> GetMovies(int pageIndex)
         {
-            string url = $@"{BASE_URL}{GET_MOVIES_ENDPOINT}?api_key={API_KEY}&page={pageIndex}";
-            string content = await httpClient.GetStringAsync(url);
+            DataWrapper<List<Movie>> dataWrapper = new DataWrapper<List<Movie>>();
 
-            MoviesReponseDto response = JsonConvert.DeserializeObject<MoviesReponseDto>(content);
-            List<Movie> movies = DataMappers.MoviesDtoToMovies(response.results);
-            return movies;
+            string url = $@"{BASE_URL}{GET_MOVIES_ENDPOINT}?api_key={API_KEY}&page={pageIndex}";
+            try
+            {
+                string content = await httpClient.GetStringAsync(url);
+                MoviesReponseDto response = JsonConvert.DeserializeObject<MoviesReponseDto>(content);
+                dataWrapper.Result = DataMappers.MoviesDtoToMovies(response.results);
+                dataWrapper.Success = true;
+            } catch (Exception e)
+            {
+                dataWrapper.MessageError = e.Message;
+                dataWrapper.Success = false;
+            }
+            return dataWrapper;
         }
     }
 }
