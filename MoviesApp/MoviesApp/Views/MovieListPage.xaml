@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:scroll="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             xmlns:controls="clr-namespace:Xamarin.Forms.Controls;assembly=CircularProgressBar"
+             x:Class="MoviesApp.Views.MovieListPage"
+             Title="MoviesApp">
+
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Movies}" RowHeight="65" SeparatorVisibility="None" ItemTapped="Handle_ItemTapped" SelectionMode="None" >
+            <ListView.Behaviors>
+                <scroll:InfiniteScrollBehavior IsLoadingMore="{Binding IsLoading}" />
+            </ListView.Behaviors>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Grid x:Name="grid" RowSpacing="0" ColumnDefinitions="Auto, *" RowDefinitions="*, 1" Padding="10">
+                                <Frame CornerRadius="100" HeightRequest="45" WidthRequest="45" HorizontalOptions="Center" IsClippedToBounds="True" Padding="0">
+                                    <Image Aspect="AspectFill">
+                                            <Image.Source>
+                                                <UriImageSource Uri="{Binding PosterPath}" CacheValidity="1" CachingEnabled="true"/>
+                                            </Image.Source>
+                                    </Image>
+                                </Frame>
+
+                                <Grid Grid.Column="1" RowSpacing="0" Padding="5" VerticalOptions="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding Title}" FontSize="14" FontAttributes="Bold" LineBreakMode="TailTruncation"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding Overview}" FontSize="12" LineBreakMode="TailTruncation"/>
+                                </Grid>
+                            </Grid>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.Footer>
+                <StackLayout Margin="6">
+                    <controls:CircularProgressBar WidthRequest="25" HeightRequest="25" VerticalOptions="Center" HorizontalOptions="Center" Spin="True" Color="Gray"/>
+                </StackLayout>
+            </ListView.Footer>
+        </ListView>
+    </ContentPage.Content>
+    
+</ContentPage>
