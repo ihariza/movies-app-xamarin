@@ -66,10 +66,18 @@ namespace MoviesApp.ViewModels
                 movies.AddRange(dataWrapper.Result);
             } else
             {
+                ShowError(page);
+            }
+            return movies;
+        }
+
+        private async void ShowError(int pageToRetry)
+        {
+            if (pageToRetry == PageStart)
+            {
                 await _dialogService.ShowError();
                 GetMoviesStart();
             }
-            return movies;
         }
 
         void GoToMovieDetail(Movie movie)
