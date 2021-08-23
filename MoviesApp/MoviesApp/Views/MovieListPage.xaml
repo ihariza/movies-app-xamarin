@@ -16,7 +16,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <Grid x:Name="grid" RowSpacing="0" ColumnDefinitions="Auto, *" RowDefinitions="*, 1" Padding="10">
+                            <Grid x:Name="grid" ColumnDefinitions="Auto, *" RowDefinitions="*, 1" Padding="10">
                                 <Image HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="45" HeightRequest="45" Aspect="AspectFill">
                                     <Image.Source>
                                         <UriImageSource Uri="{Binding PosterPath}" CacheValidity="1" CachingEnabled="true"/>
@@ -29,7 +29,7 @@
                                     </Image.Clip>
                                 </Image>
 
-                                <Grid Grid.Column="1" RowSpacing="0" Padding="5" VerticalOptions="Center">
+                                <Grid Grid.Column="1" Padding="5" VerticalOptions="Center">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
