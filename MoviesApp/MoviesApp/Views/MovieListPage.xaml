@@ -40,7 +40,7 @@
                                            Grid.Column="0" 
                                            Text="{Binding Overview, TargetNullValue={x:Static resources:AppResources.MoviesNoOverview}}" 
                                            FontSize="12" 
-                                           Margin="5, 0, 0, 0" 
+                                           Margin="5, 2, 0, 0" 
                                            LineBreakMode="TailTruncation"/>
                                 </Grid>
                             </Grid>
