@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using MoviesApp.Resources;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MoviesApp.Services

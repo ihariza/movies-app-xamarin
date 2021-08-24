@@ -16,7 +16,7 @@ namespace MoviesApp.Models
                             movieDto.title,
                             IMAGE_BASE_URL + movieDto.poster_path,
                             IMAGE_BASE_URL + movieDto.backdrop_path,
-                            movieDto.overview ?? AppResources.MoviesNoOverview,
+                            movieDto.overview,
                             movieDto.release_date,
                             movieDto.vote_average
                         )

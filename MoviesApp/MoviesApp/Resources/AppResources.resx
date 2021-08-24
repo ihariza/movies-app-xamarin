@@ -129,6 +129,9 @@
   <data name="CommonRetry" xml:space="preserve">
     <value>Reintentar</value>
   </data>
+  <data name="MovieDetailVoteAverage" xml:space="preserve">
+    <value>Valoración</value>
+  </data>
   <data name="MoviesNoOverview" xml:space="preserve">
     <value>Sin descripción</value>
   </data>

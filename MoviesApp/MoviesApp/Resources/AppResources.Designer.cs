@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MoviesApp {
+namespace MoviesApp.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MoviesApp {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MoviesApp.AppResources", typeof(AppResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MoviesApp.Resources.AppResources", typeof(AppResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -93,6 +93,15 @@ namespace MoviesApp {
         internal static string CommonRetry {
             get {
                 return ResourceManager.GetString("CommonRetry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Valoración.
+        /// </summary>
+        internal static string MovieDetailVoteAverage {
+            get {
+                return ResourceManager.GetString("MovieDetailVoteAverage", resourceCulture);
             }
         }
         

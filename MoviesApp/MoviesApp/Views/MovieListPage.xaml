@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:scroll="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              xmlns:controls="clr-namespace:Xamarin.Forms.Controls;assembly=CircularProgressBar"
+             xmlns:resources="clr-namespace:MoviesApp.Resources"
              x:Class="MoviesApp.Views.MovieListPage"
              Title="MoviesApp">
 
@@ -34,8 +35,13 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <Label Text="{Binding Title}" FontSize="14" FontAttributes="Bold" LineBreakMode="TailTruncation"/>
-                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding Overview}" FontSize="12" LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding Title}" FontSize="14" FontAttributes="Bold" Margin="5, 0, 0, 0" LineBreakMode="TailTruncation"/>
+                                    <Label Grid.Row="1" 
+                                           Grid.Column="0" 
+                                           Text="{Binding Overview, TargetNullValue={x:Static resources:AppResources.MoviesNoOverview}}" 
+                                           FontSize="12" 
+                                           Margin="5, 0, 0, 0" 
+                                           LineBreakMode="TailTruncation"/>
                                 </Grid>
                             </Grid>
                         </ViewCell.View>
@@ -45,7 +51,10 @@
 
             <ListView.Footer>
                 <StackLayout Margin="6">
-                    <controls:CircularProgressBar WidthRequest="25" HeightRequest="25" VerticalOptions="Center" HorizontalOptions="Center" Spin="True" Color="Gray"/>
+                    <controls:CircularProgressBar
+                        WidthRequest="25" HeightRequest="25" 
+                        VerticalOptions="Center" HorizontalOptions="Center" 
+                        Spin="True" Color="Gray"/>
                 </StackLayout>
             </ListView.Footer>
         </ListView>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoviesApp.Views.MovieDetailPage"
              xmlns:viewmodels="clr-namespace:MoviesApp.ViewModels"
+             xmlns:resources="clr-namespace:MoviesApp.Resources"
              x:DataType="viewmodels:MovieDetailViewModel">
 
     <ContentPage.Content>
@@ -12,8 +13,24 @@
                     <UriImageSource Uri="{Binding Movie.BackdropPath}" CacheValidity="1" CachingEnabled="true"/>
                 </Image.Source>
             </Image>
-            <Label Text="{Binding Movie.Title}" FontSize="14" FontAttributes="Bold" Padding="16"/>
-            <Label Text="{Binding Movie.Overview}" Padding="16, 0, 16, 16"/>
+            <Label Text="{Binding Movie.Title}" FontSize="18" FontAttributes="Bold" Padding="16, 16, 16, 2"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding Movie.ReleaseDate}" Padding="16, 0, 16, 0" />
+                <Label Grid.Column="1" HorizontalOptions="End" Padding="16, 0, 16, 0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resources:AppResources.MovieDetailVoteAverage}" />
+                            <Span Text="{Binding Movie.VoteAverage, StringFormat=': {0}'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+            <Label Text="{Binding Movie.Overview}" Padding="16, 16, 16, 8"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
