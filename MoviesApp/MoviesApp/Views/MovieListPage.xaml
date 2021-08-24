@@ -11,7 +11,7 @@
         <StackLayout>
             <SearchBar x:Name="searchBar"
                        Placeholder="{x:Static resources:AppResources.MoviesSearch}"
-                       TextChanged="OnTextChanged"/>
+                       Text="{Binding Query}"/>
 
             <ListView CachingStrategy="RecycleElement" 
                       ItemsSource="{Binding Movies}" 

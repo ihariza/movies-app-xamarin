@@ -17,7 +17,7 @@ namespace MoviesApp.ViewModels
         private readonly IMovieDataService _movieDataService;
         private readonly IDialogService _dialogService;
 
-        private string query;
+  
         private int currentPage;
 
         private bool _isLoading = true;
@@ -27,18 +27,21 @@ namespace MoviesApp.ViewModels
             set { _isLoading = value; OnPropertyChanged(); }
         }
 
+        private string _query;
+        public string Query
+        {
+            get => _query;
+            set { 
+                _query = value;
+                currentPage = 0;
+                Movies.Clear();
+                Movies.LoadMoreAsync();
+            }
+        }
+
         public InfiniteScrollCollection<Movie> Movies { get; set; }
 
         public ICommand GoToMovieDetailCommand => new Command<Movie>(GoToMovieDetail);
-
-        public ICommand PerformSearch => new Command<string>((string query) =>
-        {
-            this.query = query;
-            this.currentPage = 0;
-
-            Movies.Clear();
-            Movies.LoadMoreAsync();
-        });
 
         public MovieListViewModel(
             INavigationService navigation, 
@@ -59,7 +62,7 @@ namespace MoviesApp.ViewModels
                     if (page > currentPage)
                     {
                         currentPage = page;
-                        if (string.IsNullOrWhiteSpace(query))
+                        if (string.IsNullOrWhiteSpace(_query))
                         {
                             movies = await GetMovies(currentPage);
                         }
@@ -84,7 +87,7 @@ namespace MoviesApp.ViewModels
 
         private async Task<List<Movie>> SearchMovies(int page)
         {
-            var dataWrapper = await _movieDataService.SearchMovies(query, page);
+            var dataWrapper = await _movieDataService.SearchMovies(_query, page);
             return GetMoviesFromDataWrapper(dataWrapper, page);
         }
 
