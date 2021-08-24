@@ -4,8 +4,15 @@
              x:Class="MoviesApp.Views.MovieDetailPage"
              xmlns:viewmodels="clr-namespace:MoviesApp.ViewModels"
              xmlns:resources="clr-namespace:MoviesApp.Resources"
+             xmlns:converters="clr-namespace:MoviesApp.Converters"
              x:DataType="viewmodels:MovieDetailViewModel">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:TextToBoolConverter x:Key="TextToBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="0">
@@ -21,8 +28,10 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="{Binding Movie.ReleaseDate}" Padding="16, 0, 16, 0" />
-                    <Label Grid.Column="1" HorizontalOptions="End" Padding="16, 0, 16, 0">
+                    <Label Text="{Binding Movie.ReleaseDate}" Padding="16, 0, 16, 0" 
+                           IsVisible="{Binding Movie.ReleaseDate, Converter={StaticResource TextToBoolConverter}}"/>
+                    <Label Grid.Column="1" HorizontalOptions="End" Padding="16, 0, 16, 0"
+                           IsVisible="{Binding Movie.VoteAverage, Converter={StaticResource TextToBoolConverter}}">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{x:Static resources:AppResources.MovieDetailVoteAverage}" />
