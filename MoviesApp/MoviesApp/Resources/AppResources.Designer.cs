@@ -115,7 +115,7 @@ namespace MoviesApp.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Buscar películas....
+        ///   Busca una cadena traducida similar a Buscar película....
         /// </summary>
         internal static string MoviesSearch {
             get {
