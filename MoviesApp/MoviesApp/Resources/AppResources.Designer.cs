@@ -113,5 +113,14 @@ namespace MoviesApp.Resources {
                 return ResourceManager.GetString("MoviesNoOverview", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Buscar películas....
+        /// </summary>
+        internal static string MoviesSearch {
+            get {
+                return ResourceManager.GetString("MoviesSearch", resourceCulture);
+            }
+        }
     }
 }

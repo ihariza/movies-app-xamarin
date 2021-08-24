@@ -135,4 +135,7 @@
   <data name="MoviesNoOverview" xml:space="preserve">
     <value>Sin descripción</value>
   </data>
+  <data name="MoviesSearch" xml:space="preserve">
+    <value>Buscar películas...</value>
+  </data>
 </root>

@@ -10,7 +10,7 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="searchBar"
-                       Placeholder="Search Movie..."
+                       Placeholder="{x:Static resources:AppResources.MoviesSearch}"
                        TextChanged="OnTextChanged"/>
 
             <ListView CachingStrategy="RecycleElement" 
