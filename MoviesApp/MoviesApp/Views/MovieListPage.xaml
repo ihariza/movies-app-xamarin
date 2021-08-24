@@ -30,13 +30,13 @@
                                 <Grid ColumnDefinitions="Auto, *" RowDefinitions="*, 1" Padding="10">
                                     <Image HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="45" HeightRequest="45" Aspect="AspectFill">
                                         <Image.Source>
-                                            <UriImageSource Uri="{Binding PosterPath}" CacheValidity="1" CachingEnabled="true"/>
+                                            <UriImageSource Uri="{Binding PosterPath}" CacheValidity="1" CachingEnabled="true" />
                                         </Image.Source>
                                         <Image.Clip>
                                             <EllipseGeometry
-                                            Center="22,22"
-                                            RadiusX="22"
-                                            RadiusY="22"/>
+                                                Center="22,22"
+                                                RadiusX="22"
+                                                RadiusY="22"/>
                                         </Image.Clip>
                                     </Image>
 

@@ -18,6 +18,7 @@ namespace MoviesApp.ViewModels
         private readonly IDialogService _dialogService;
 
         private string query;
+        private int currentPage;
 
         private bool _isLoading = true;
         public bool IsLoading
@@ -33,6 +34,7 @@ namespace MoviesApp.ViewModels
         public ICommand PerformSearch => new Command<string>((string query) =>
         {
             this.query = query;
+            this.currentPage = 0;
 
             Movies.Clear();
             Movies.LoadMoreAsync();
@@ -52,17 +54,22 @@ namespace MoviesApp.ViewModels
                 OnLoadMore = async () =>
                 {
                     // load the next page
-                    var page = (Movies.Count / PageSize);
+                    var page = (Movies.Count / PageSize) + 1;
                     List<Movie> movies = null;
-                    if (string.IsNullOrWhiteSpace(query))
+                    if (page > currentPage)
                     {
-                        movies = await GetMovies(page + 1);
-                    } else
-                    {
-                        movies = await SearchMovies(page + 1);
+                        currentPage = page;
+                        if (string.IsNullOrWhiteSpace(query))
+                        {
+                            movies = await GetMovies(currentPage);
+                        }
+                        else
+                        {
+                            movies = await SearchMovies(currentPage);
+                        }
                     }
                     IsLoading = false;
-                    return movies.Count > 0 ? movies : null;
+                    return movies != null && movies.Count > 0 ? movies : null;
                 }
             };
 
