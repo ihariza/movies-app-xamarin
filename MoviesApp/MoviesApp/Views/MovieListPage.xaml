@@ -8,57 +8,69 @@
              Title="MoviesApp">
 
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Movies}" RowHeight="65" SeparatorVisibility="None" ItemTapped="Handle_ItemTapped" SelectionMode="None" >
-            <ListView.Behaviors>
-                <scroll:InfiniteScrollBehavior IsLoadingMore="{Binding IsLoading}" />
-            </ListView.Behaviors>
+        <StackLayout>
+            <SearchBar x:Name="searchBar"
+                       Placeholder="Search Movie..."
+                       TextChanged="OnTextChanged"/>
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.View>
-                            <Grid ColumnDefinitions="Auto, *" RowDefinitions="*, 1" Padding="10">
-                                <Image HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="45" HeightRequest="45" Aspect="AspectFill">
-                                    <Image.Source>
-                                        <UriImageSource Uri="{Binding PosterPath}" CacheValidity="1" CachingEnabled="true"/>
-                                    </Image.Source>
-                                    <Image.Clip>
-                                        <EllipseGeometry
+            <ListView CachingStrategy="RecycleElement" 
+                      ItemsSource="{Binding Movies}" 
+                      RowHeight="65" 
+                      SeparatorVisibility="None" 
+                      ItemTapped="Handle_ItemTapped" 
+                      SelectionMode="None" >
+                <ListView.Behaviors>
+                    <scroll:InfiniteScrollBehavior IsLoadingMore="{Binding IsLoading}" />
+                </ListView.Behaviors>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid ColumnDefinitions="Auto, *" RowDefinitions="*, 1" Padding="10">
+                                    <Image HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="45" HeightRequest="45" Aspect="AspectFill">
+                                        <Image.Source>
+                                            <UriImageSource Uri="{Binding PosterPath}" CacheValidity="1" CachingEnabled="true"/>
+                                        </Image.Source>
+                                        <Image.Clip>
+                                            <EllipseGeometry
                                             Center="22,22"
                                             RadiusX="22"
                                             RadiusY="22"/>
-                                    </Image.Clip>
-                                </Image>
+                                        </Image.Clip>
+                                    </Image>
 
-                                <Grid Grid.Column="1" Padding="5" VerticalOptions="Center">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Label Text="{Binding Title}" FontSize="14" FontAttributes="Bold" Margin="5, 0, 0, 0" LineBreakMode="TailTruncation"/>
-                                    <Label Grid.Row="1" 
+                                    <Grid Grid.Column="1" Padding="5" VerticalOptions="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Label Text="{Binding Title}" FontSize="14" FontAttributes="Bold" Margin="5, 0, 0, 0" LineBreakMode="TailTruncation"/>
+                                        <Label Grid.Row="1" 
                                            Grid.Column="0" 
                                            Text="{Binding Overview, TargetNullValue={x:Static resources:AppResources.MoviesNoOverview}}" 
                                            FontSize="12" 
                                            Margin="5, 2, 0, 0" 
                                            LineBreakMode="TailTruncation"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </ViewCell.View>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-            <ListView.Footer>
-                <controls:CircularProgressBar
+                <ListView.Footer>
+                    <controls:CircularProgressBar
                         x:Name="circularProgressBar"
                         WidthRequest="25" HeightRequest="25" 
                         VerticalOptions="Center" HorizontalOptions="Center" 
                         Margin="6"
                         Progress="20"
-                        Spin="True" Color="Gray"/>
-            </ListView.Footer>
-        </ListView>
+                        Spin="True" Color="Gray"
+                        IsVisible="{Binding IsLoading}"/>
+                </ListView.Footer>
+            </ListView>
+        </StackLayout>
     </ContentPage.Content>
 
 </ContentPage>

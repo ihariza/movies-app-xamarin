@@ -21,5 +21,10 @@ namespace MoviesApp.Views
                 ViewModelManager.MovieListViewModel.GoToMovieDetailCommand.Execute(e.Item);
             }
         }
+
+        void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ViewModelManager.MovieListViewModel.PerformSearch.Execute(e.NewTextValue);
+        }
     }
 }

@@ -17,15 +17,27 @@ namespace MoviesApp.ViewModels
         private readonly IMovieDataService _movieDataService;
         private readonly IDialogService _dialogService;
 
+        private string query;
+
         private bool _isLoading = true;
         public bool IsLoading
         {
             get => _isLoading;
             set { _isLoading = value; OnPropertyChanged(); }
         }
+
         public InfiniteScrollCollection<Movie> Movies { get; set; }
 
-        public ICommand GoToMovieDetailCommand { private set; get; }
+        public ICommand GoToMovieDetailCommand => new Command<Movie>(GoToMovieDetail);
+
+        public ICommand PerformSearch => new Command<string>((string query) =>
+        {
+            this.query = query;
+
+            Movies.Clear();
+            Movies.LoadMoreAsync();
+        });
+
         public MovieListViewModel(
             INavigationService navigation, 
             IMovieDataService movieDataService,
@@ -35,39 +47,55 @@ namespace MoviesApp.ViewModels
             _movieDataService = movieDataService;
             _dialogService = dialogService;
 
-            GoToMovieDetailCommand = new Command<Movie>(GoToMovieDetail);
-
             Movies = new InfiniteScrollCollection<Movie>()
             {
                 OnLoadMore = async () =>
                 {
                     // load the next page
-                    var page = (Movies.Count / PageSize) + 1;
-                    var movies = await GetMovies(page);
-                    return movies;
+                    var page = (Movies.Count / PageSize);
+                    List<Movie> movies = null;
+                    if (string.IsNullOrWhiteSpace(query))
+                    {
+                        movies = await GetMovies(page + 1);
+                    } else
+                    {
+                        movies = await SearchMovies(page + 1);
+                    }
+                    IsLoading = false;
+                    return movies.Count > 0 ? movies : null;
                 }
             };
 
-            GetMoviesStart();
-        }
-
-        private async void GetMoviesStart()
-        {
-            var movies = await GetMovies(PageStart);
-            Movies.AddRange(movies);
+            Movies.LoadMoreAsync();
         }
 
         private async Task<List<Movie>> GetMovies(int page)
         {
-            List<Movie> movies = new List<Movie>();
             var dataWrapper = await _movieDataService.GetMovies(page);
+            return GetMoviesFromDataWrapper(dataWrapper, page);
+        }
+
+        private async Task<List<Movie>> SearchMovies(int page)
+        {
+            var dataWrapper = await _movieDataService.SearchMovies(query, page);
+            return GetMoviesFromDataWrapper(dataWrapper, page);
+        }
+
+        private List<Movie> GetMoviesFromDataWrapper(DataWrapper<List<Movie>> dataWrapper, int pageToRetry)
+        {
+            List<Movie> movies = new List<Movie>();
             if (dataWrapper.Success)
             {
-                movies.AddRange(dataWrapper.Result);
-            } else
-            {
-                ShowError(page);
+                if (dataWrapper.Result.Count > 0)
+                {
+                    movies.AddRange(dataWrapper.Result);
+                }
             }
+            else
+            {
+                ShowError(pageToRetry);
+            }
+
             return movies;
         }
 
@@ -76,7 +104,8 @@ namespace MoviesApp.ViewModels
             if (pageToRetry == PageStart)
             {
                 await _dialogService.ShowError();
-                GetMoviesStart();
+                Movies.Clear();
+                await Movies.LoadMoreAsync();
             }
         }
 
