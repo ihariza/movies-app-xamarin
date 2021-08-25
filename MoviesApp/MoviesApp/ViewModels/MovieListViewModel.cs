@@ -86,7 +86,7 @@ namespace MoviesApp.ViewModels
                 Movies.Add(movie);
             });
 
-            if (movies.Count == 0)
+            if (movies.Count < PageSize)
             {
                 ItemsThreshold = -1;
             }
