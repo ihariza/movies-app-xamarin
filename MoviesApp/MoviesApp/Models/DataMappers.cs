@@ -14,8 +14,8 @@ namespace MoviesApp.Models
                 movies.Add(
                     new Movie(
                             movieDto.title,
-                            string.IsNullOrWhiteSpace(movieDto.poster_path) ? null : IMAGE_BASE_URL + movieDto.poster_path,
-                            string.IsNullOrWhiteSpace(movieDto.backdrop_path) ? null : IMAGE_BASE_URL + movieDto.backdrop_path,
+                            string.IsNullOrWhiteSpace(movieDto.poster_path) ? IMAGE_BASE_URL : IMAGE_BASE_URL + movieDto.poster_path,
+                            string.IsNullOrWhiteSpace(movieDto.backdrop_path) ? IMAGE_BASE_URL : IMAGE_BASE_URL + movieDto.backdrop_path,
                             string.IsNullOrWhiteSpace(movieDto.overview) ? null : movieDto.overview,
                             string.IsNullOrWhiteSpace(movieDto.release_date) ? null : movieDto.release_date,
                             string.IsNullOrWhiteSpace(movieDto.vote_average) ? null: movieDto.vote_average

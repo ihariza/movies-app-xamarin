@@ -5,6 +5,7 @@
              xmlns:viewmodels="clr-namespace:MoviesApp.ViewModels"
              xmlns:resources="clr-namespace:MoviesApp.Resources"
              xmlns:converters="clr-namespace:MoviesApp.Converters"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:DataType="viewmodels:MovieDetailViewModel">
 
     <ContentPage.Resources>
@@ -16,11 +17,15 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="0">
-                <Image HorizontalOptions="Fill" HeightRequest="300" Aspect="AspectFill">
-                    <Image.Source>
-                        <UriImageSource Uri="{Binding Movie.BackdropPath}" CacheValidity="1" CachingEnabled="true"/>
-                    </Image.Source>
-                </Image>
+                <ffimageloadingsvg:SvgCachedImage
+                                        HorizontalOptions="Fill" 
+                                        HeightRequest="300"
+                                        Aspect="AspectFill"
+                                        DownsampleToViewSize="true"
+                                        LoadingPlaceholder="resource://MoviesApp.Resources.Images.placeholder_blank.svg"
+                                        ErrorPlaceholder="resource://MoviesApp.Resources.Images.placeholder.svg"
+                                        Source="{Binding Movie.BackdropPath}"/>
+
                 <Label Text="{Binding Movie.Title}" FontSize="18" FontAttributes="Bold" Padding="16, 16, 16, 2"/>
                 <Grid>
                     <Grid.ColumnDefinitions>

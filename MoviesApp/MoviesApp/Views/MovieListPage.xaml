@@ -4,6 +4,9 @@
              xmlns:scroll="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              xmlns:controls="clr-namespace:Xamarin.Forms.Controls;assembly=CircularProgressBar"
              xmlns:resources="clr-namespace:MoviesApp.Resources"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="MoviesApp.Views.MovieListPage"
              Title="MoviesApp">
 
@@ -28,18 +31,21 @@
                         <ViewCell>
                             <ViewCell.View>
                                 <Grid ColumnDefinitions="Auto, *" RowDefinitions="*, 1" Padding="10">
-                                    <Image HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="45" HeightRequest="45" Aspect="AspectFill">
-                                        <Image.Source>
-                                            <UriImageSource Uri="{Binding PosterPath}" CacheValidity="1" CachingEnabled="true" />
-                                        </Image.Source>
-                                        <Image.Clip>
-                                            <EllipseGeometry
-                                                Center="22,22"
-                                                RadiusX="22"
-                                                RadiusY="22"/>
-                                        </Image.Clip>
-                                    </Image>
-
+                                    <ffimageloadingsvg:SvgCachedImage
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        WidthRequest="45"
+                                        HeightRequest="45"
+                                        Aspect="AspectFill"
+                                        DownsampleToViewSize="true"
+                                        LoadingPlaceholder="resource://MoviesApp.Resources.Images.placeholder_round.svg"
+                                        ErrorPlaceholder="resource://MoviesApp.Resources.Images.placeholder_round.svg"
+                                        Source="{Binding PosterPath}">
+                                        <ffimageloading:CachedImage.Transformations>
+                                            <fftransformations:CircleTransformation/>
+                                        </ffimageloading:CachedImage.Transformations>
+                                    </ffimageloadingsvg:SvgCachedImage>
+                                    
                                     <Grid Grid.Column="1" Padding="5" VerticalOptions="Center">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*" />
