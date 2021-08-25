@@ -23,7 +23,7 @@ namespace MoviesApp.Services
                 Page page = (Page)Activator.CreateInstance(pageType);
                 page.SetNavigationArgs(parameter);
 
-                MainPage.Navigation.PushModalAsync(page);
+                MainPage.Navigation.PushAsync(page);
 
                 (page.BindingContext as BaseViewModel).Initialize(parameter);
             }

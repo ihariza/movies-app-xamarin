@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:scroll="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              xmlns:controls="clr-namespace:Xamarin.Forms.Controls;assembly=CircularProgressBar"
              xmlns:resources="clr-namespace:MoviesApp.Resources"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
@@ -16,22 +15,19 @@
                        Placeholder="{x:Static resources:AppResources.MoviesSearch}"
                        Text="{Binding Query}"/>
 
-            <ListView CachingStrategy="RecycleElement" 
-                      ItemsSource="{Binding Movies}" 
-                      RowHeight="65" 
-                      SeparatorVisibility="None" 
-                      ItemTapped="Handle_ItemTapped" 
-                      SelectionMode="None" >
-                <ListView.Behaviors>
-                    <scroll:InfiniteScrollBehavior IsLoadingMore="{Binding IsLoading}" />
-                </ListView.Behaviors>
-
-                <ListView.ItemTemplate>
+            <CollectionView x:Name="moviesCollectionView"
+                            ItemsSource="{Binding Movies}" 
+                            ItemSizingStrategy="MeasureFirstItem"
+                            ItemsUpdatingScrollMode="KeepScrollOffset"
+                            SelectionMode="Single"
+                            SelectionChanged="OnCollectionViewSelectionChanged"
+                            RemainingItemsThreshold="{Binding ItemsThreshold}"
+                            RemainingItemsThresholdReachedCommand="{Binding ItemTresholdReachedCommand}">
+                
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <Grid ColumnDefinitions="Auto, *" RowDefinitions="*, 1" Padding="10">
-                                    <ffimageloadingsvg:SvgCachedImage
+                        <Grid BackgroundColor="White" ColumnDefinitions="Auto, *" RowDefinitions="*, 1" Padding="10">
+                            <ffimageloadingsvg:SvgCachedImage
                                         HorizontalOptions="Center"
                                         VerticalOptions="Center"
                                         WidthRequest="45"
@@ -41,32 +37,31 @@
                                         LoadingPlaceholder="resource://MoviesApp.Resources.Images.placeholder_round.svg"
                                         ErrorPlaceholder="resource://MoviesApp.Resources.Images.placeholder_round.svg"
                                         Source="{Binding PosterPath}">
-                                        <ffimageloading:CachedImage.Transformations>
-                                            <fftransformations:CircleTransformation/>
-                                        </ffimageloading:CachedImage.Transformations>
-                                    </ffimageloadingsvg:SvgCachedImage>
-                                    
-                                    <Grid Grid.Column="1" Padding="5" VerticalOptions="Center">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-                                        <Label Text="{Binding Title}" FontSize="14" FontAttributes="Bold" Margin="5, 0, 0, 0" LineBreakMode="TailTruncation"/>
-                                        <Label Grid.Row="1" 
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation/>
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloadingsvg:SvgCachedImage>
+
+                            <Grid Grid.Column="1" Padding="5" VerticalOptions="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Title}" FontSize="14" FontAttributes="Bold" Margin="5, 0, 0, 0" LineBreakMode="TailTruncation"/>
+                                <Label Grid.Row="1" 
                                            Grid.Column="0" 
                                            Text="{Binding Overview, TargetNullValue={x:Static resources:AppResources.MoviesNoOverview}}" 
                                            FontSize="12" 
                                            Margin="5, 2, 0, 0" 
                                            LineBreakMode="TailTruncation"/>
-                                    </Grid>
-                                </Grid>
-                            </ViewCell.View>
-                        </ViewCell>
+                            </Grid>
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </CollectionView.ItemTemplate>
 
-                <ListView.Footer>
-                    <controls:CircularProgressBar
+                <CollectionView.Footer>
+                    <StackLayout>
+                        <controls:CircularProgressBar
                         x:Name="circularProgressBar"
                         WidthRequest="25" HeightRequest="25" 
                         VerticalOptions="Center" HorizontalOptions="Center" 
@@ -74,8 +69,9 @@
                         Progress="20"
                         Spin="True" Color="Gray"
                         IsVisible="{Binding IsLoading}"/>
-                </ListView.Footer>
-            </ListView>
+                    </StackLayout>
+                </CollectionView.Footer>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 

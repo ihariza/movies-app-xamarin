@@ -6,8 +6,9 @@
         {
         }
 
-        public Movie(string title, string posterPath, string backdropPath, string overview, string releaseDate, string voteAverage)
+        public Movie(int id, string title, string posterPath, string backdropPath, string overview, string releaseDate, string voteAverage)
         {
+            Id = id;
             Title = title;
             PosterPath = posterPath;
             BackdropPath = backdropPath;
@@ -16,6 +17,7 @@
             VoteAverage = voteAverage;
         }
 
+        public int Id { get; set; }
         public string Title { get; set; }
         public string PosterPath { get; set; }
         public string BackdropPath { get; set; }

@@ -1,5 +1,5 @@
-﻿using MoviesApp.Utility;
-
+﻿using MoviesApp.Models;
+using MoviesApp.Utility;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,11 +14,13 @@ namespace MoviesApp.Views
             BindingContext = ViewModelManager.MovieListViewModel;
         }
 
-        void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.Item != null && ViewModelManager.MovieListViewModel.GoToMovieDetailCommand.CanExecute(e))
+            Movie movie = e.CurrentSelection.Count > 0 ? e.CurrentSelection[0] as Movie : null;
+            if (movie != null)
             {
-                ViewModelManager.MovieListViewModel.GoToMovieDetailCommand.Execute(e.Item);
+                ViewModelManager.MovieListViewModel.GoToMovieDetailCommand.Execute(movie);
+                moviesCollectionView.SelectedItem = null;
             }
         }
     }

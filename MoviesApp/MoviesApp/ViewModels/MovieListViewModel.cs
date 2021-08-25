@@ -2,10 +2,10 @@
 using MoviesApp.Services;
 using MoviesApp.Utility;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using Xamarin.Forms.Extended;
 
 namespace MoviesApp.ViewModels
 {
@@ -13,18 +13,24 @@ namespace MoviesApp.ViewModels
     {
         private const int PageStart = 1;
         private const int PageSize = 20;
+        private const int ItemsMaxThreshold = 5;
         private readonly INavigationService _navigationService;
         private readonly IMovieDataService _movieDataService;
         private readonly IDialogService _dialogService;
 
-  
-        private int currentPage;
 
-        private bool _isLoading = true;
+        private bool _isLoading;
         public bool IsLoading
         {
             get => _isLoading;
             set { _isLoading = value; OnPropertyChanged(); }
+        }
+
+        private int _itemsThreshold;
+        public int ItemsThreshold
+        {
+            get => _itemsThreshold;
+            set { _itemsThreshold = value; OnPropertyChanged(); }
         }
 
         private string _query;
@@ -33,15 +39,21 @@ namespace MoviesApp.ViewModels
             get => _query;
             set { 
                 _query = value;
-                currentPage = 0;
                 Movies.Clear();
-                Movies.LoadMoreAsync();
+                ItemsThreshold = ItemsMaxThreshold;
+                LoadMovies();
             }
         }
 
-        public InfiniteScrollCollection<Movie> Movies { get; set; }
+        private ObservableCollection<Movie> _movies;
+        public ObservableCollection<Movie> Movies
+        {
+            get => _movies;
+            set { _movies = value; OnPropertyChanged(); }
+        }
 
         public ICommand GoToMovieDetailCommand => new Command<Movie>(GoToMovieDetail);
+        public ICommand ItemTresholdReachedCommand => new Command(LoadMovies);
 
         public MovieListViewModel(
             INavigationService navigation, 
@@ -52,31 +64,33 @@ namespace MoviesApp.ViewModels
             _movieDataService = movieDataService;
             _dialogService = dialogService;
 
-            Movies = new InfiniteScrollCollection<Movie>()
-            {
-                OnLoadMore = async () =>
-                {
-                    // load the next page
-                    var page = (Movies.Count / PageSize) + 1;
-                    List<Movie> movies = null;
-                    if (page > currentPage)
-                    {
-                        currentPage = page;
-                        if (string.IsNullOrWhiteSpace(_query))
-                        {
-                            movies = await GetMovies(currentPage);
-                        }
-                        else
-                        {
-                            movies = await SearchMovies(currentPage);
-                        }
-                    }
-                    IsLoading = false;
-                    return movies != null && movies.Count > 0 ? movies : null;
-                }
-            };
+            Movies = new ObservableCollection<Movie>();
+            ItemsThreshold = ItemsMaxThreshold;
 
-            Movies.LoadMoreAsync();
+            LoadMovies();
+        }
+
+        private async void LoadMovies()
+        {
+            if (IsLoading)
+            {
+                return;
+            }
+            IsLoading = true;
+            int page = (Movies.Count / PageSize) + 1;
+            List<Movie> movies = new List<Movie>();
+
+            movies = string.IsNullOrWhiteSpace(_query) ? await GetMovies(page) : await SearchMovies(page);
+            movies.ForEach(movie =>
+            {
+                Movies.Add(movie);
+            });
+
+            if (movies.Count == 0)
+            {
+                ItemsThreshold = -1;
+            }
+            IsLoading = false;
         }
 
         private async Task<List<Movie>> GetMovies(int page)
@@ -115,7 +129,7 @@ namespace MoviesApp.ViewModels
             {
                 await _dialogService.ShowError();
                 Movies.Clear();
-                await Movies.LoadMoreAsync();
+                LoadMovies();
             }
         }
 

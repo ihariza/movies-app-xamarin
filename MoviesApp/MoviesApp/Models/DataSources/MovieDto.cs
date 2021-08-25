@@ -2,6 +2,7 @@
 {
     public class MovieDto
     {
+        public int id;
         public string title;
         public string poster_path;
         public string backdrop_path;

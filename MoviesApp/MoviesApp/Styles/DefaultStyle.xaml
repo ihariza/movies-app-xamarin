@@ -10,7 +10,7 @@
     <!--#endregion-->
    
     <!--#region NavigationPage-->
-    <Style TargetType="NavigationPage">
+    <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
         <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
     <!--#endregion-->
