@@ -7,7 +7,8 @@
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="MoviesApp.Views.MovieListPage"
-             Title="MoviesApp">
+             Title="MoviesApp"
+             BackgroundColor="White">
 
     <ContentPage.Content>
         <StackLayout>
@@ -20,7 +21,9 @@
                             ItemSizingStrategy="MeasureFirstItem"
                             ItemsUpdatingScrollMode="KeepScrollOffset"
                             SelectionMode="Single"
-                            SelectionChanged="OnCollectionViewSelectionChanged"
+                            SelectedItem="{Binding SelectedMovie}"
+                            SelectionChangedCommand="{Binding GoToMovieDetailCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={Reference moviesCollectionView}}"
                             RemainingItemsThreshold="{Binding ItemsThreshold}"
                             RemainingItemsThresholdReachedCommand="{Binding ItemTresholdReachedCommand}">
                 
