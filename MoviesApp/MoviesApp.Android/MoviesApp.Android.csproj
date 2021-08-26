@@ -110,11 +110,6 @@
       <Name>MoviesApp</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <AndroidResourceAnalysisConfig Include="Resources\drawable\ic_loading.xml">
-      <SubType>Designer</SubType>
-    </AndroidResourceAnalysisConfig>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
