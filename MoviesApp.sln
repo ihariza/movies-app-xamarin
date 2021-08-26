@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesApp.Android", "Movies
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesApp.iOS", "MoviesApp\MoviesApp.iOS\MoviesApp.iOS.csproj", "{C379EFC3-0A65-4EA4-BB9C-443BEBD3DFF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesApp", "MoviesApp\MoviesApp\MoviesApp.csproj", "{6E15B2B4-5588-4463-952C-8AFEC968F1F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesApp", "MoviesApp\MoviesApp\MoviesApp.csproj", "{6E15B2B4-5588-4463-952C-8AFEC968F1F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesApp.UITest", "MoviesApp\MoviesApp.UITest\MoviesApp.UITest.csproj", "{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A2F82E76-E6AB-472E-A325-A73172637978} = {A2F82E76-E6AB-472E-A325-A73172637978}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +78,18 @@ Global
 		{6E15B2B4-5588-4463-952C-8AFEC968F1F3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{6E15B2B4-5588-4463-952C-8AFEC968F1F3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{6E15B2B4-5588-4463-952C-8AFEC968F1F3}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Release|iPhone.Build.0 = Release|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{3F1CF20C-7415-4F70-949A-0D47B14D6DC3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
