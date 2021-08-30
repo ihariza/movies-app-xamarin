@@ -33,13 +33,6 @@ namespace MoviesApp.ViewModels
             set { _itemsThreshold = value; OnPropertyChanged(); }
         }
 
-        private Movie _selectedMovie;
-        public Movie SelectedMovie
-        {
-            get => _selectedMovie;
-            set { _selectedMovie = value; OnPropertyChanged(); }
-        }
-
         private string _query;
         public string Query
         {
@@ -145,7 +138,6 @@ namespace MoviesApp.ViewModels
             if (movie != null)
             {
                 _navigationService.NavigateTo(ViewNames.MovieDetailPage, movie);
-                SelectedMovie = null;
             }
         }
     }

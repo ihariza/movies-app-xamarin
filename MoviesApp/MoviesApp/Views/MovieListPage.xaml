@@ -21,7 +21,6 @@
                             ItemSizingStrategy="MeasureFirstItem"
                             ItemsUpdatingScrollMode="KeepScrollOffset"
                             SelectionMode="Single"
-                            SelectedItem="{Binding SelectedMovie}"
                             SelectionChangedCommand="{Binding GoToMovieDetailCommand}"
                             SelectionChangedCommandParameter="{Binding SelectedItem, Source={Reference moviesCollectionView}}"
                             RemainingItemsThreshold="{Binding ItemsThreshold}"

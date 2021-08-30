@@ -13,5 +13,10 @@ namespace MoviesApp.Views
             BindingContext = ViewModelManager.MovieListViewModel;
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            moviesCollectionView.SelectedItem = null;
+        }
     }
 }
