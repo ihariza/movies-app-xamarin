@@ -121,21 +121,21 @@
     <value>MoviesApp</value>
   </data>
   <data name="CommonErrorSubtitle" xml:space="preserve">
-    <value>Seguramente sea cosa nuestra, pero por si acaso revisa tu conexión. ¡Gracias!</value>
+    <value>It's probably our thing, but just in case check your connection. Thanks!</value>
   </data>
   <data name="CommonErrorTitle" xml:space="preserve">
     <value>¡Ups!</value>
   </data>
   <data name="CommonRetry" xml:space="preserve">
-    <value>Reintentar</value>
+    <value>Retry</value>
   </data>
   <data name="MovieDetailVoteAverage" xml:space="preserve">
-    <value>Valoración</value>
+    <value>Vote average</value>
   </data>
   <data name="MoviesNoOverview" xml:space="preserve">
-    <value>Sin descripción</value>
+    <value>No overview</value>
   </data>
   <data name="MoviesSearch" xml:space="preserve">
-    <value>Buscar película...</value>
+    <value>Search...</value>
   </data>
 </root>

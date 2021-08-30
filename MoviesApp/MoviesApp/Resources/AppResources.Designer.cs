@@ -70,7 +70,7 @@ namespace MoviesApp.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Seguramente sea cosa nuestra, pero por si acaso revisa tu conexión. ¡Gracias!.
+        ///   Busca una cadena traducida similar a It&apos;s probably our thing, but just in case check your connection. Thanks!.
         /// </summary>
         internal static string CommonErrorSubtitle {
             get {
@@ -88,7 +88,7 @@ namespace MoviesApp.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Reintentar.
+        ///   Busca una cadena traducida similar a Retry.
         /// </summary>
         internal static string CommonRetry {
             get {
@@ -97,7 +97,7 @@ namespace MoviesApp.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Valoración.
+        ///   Busca una cadena traducida similar a Vote average.
         /// </summary>
         internal static string MovieDetailVoteAverage {
             get {
@@ -106,7 +106,7 @@ namespace MoviesApp.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Sin descripción.
+        ///   Busca una cadena traducida similar a No overview.
         /// </summary>
         internal static string MoviesNoOverview {
             get {
@@ -115,7 +115,7 @@ namespace MoviesApp.Resources {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Buscar película....
+        ///   Busca una cadena traducida similar a Search....
         /// </summary>
         internal static string MoviesSearch {
             get {
