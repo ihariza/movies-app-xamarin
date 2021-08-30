@@ -26,7 +26,7 @@ namespace MoviesApp.UITest
         [Test]
         public void AppNameIsDisplayed()
         {
-            AppResult[] results = app.WaitForElement(c => c.Marked("MoviesApp"));
+            AppResult[] results = app.WaitForElement(c => c.Marked("The Movies App"));
             app.Screenshot("Movie List.");
 
             Assert.IsTrue(results.Any());
