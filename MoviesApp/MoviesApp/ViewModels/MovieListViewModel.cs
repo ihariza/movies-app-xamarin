@@ -23,14 +23,14 @@ namespace MoviesApp.ViewModels
         public bool IsLoading
         {
             get => _isLoading;
-            set { _isLoading = value; OnPropertyChanged(); }
+            set { SetPropertyValue(ref _isLoading, value, "IsLoading"); }
         }
 
         private int _itemsThreshold;
         public int ItemsThreshold
         {
             get => _itemsThreshold;
-            set { _itemsThreshold = value; OnPropertyChanged(); }
+            set { SetPropertyValue(ref _itemsThreshold, value, "ItemsThreshold"); }
         }
 
         private string _query;
@@ -49,7 +49,7 @@ namespace MoviesApp.ViewModels
         public ObservableCollection<Movie> Movies
         {
             get => _movies;
-            set { _movies = value; OnPropertyChanged(); }
+            set { SetPropertyValue(ref _movies, value, "Movies"); }
         }
 
         public ICommand GoToMovieDetailCommand => new Command<Movie>(GoToMovieDetail);
